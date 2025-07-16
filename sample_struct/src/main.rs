@@ -1,21 +1,26 @@
-#[derive(Debug)]
-struct Horse {
-    name: String,
-    age: u32,
-    color: String,
-    father: String,
-    mother: String,
+trait Animal {
+    fn make_sound(&self);
 }
 
+struct Horse;
+struct Cat;
 
+impl Animal for Horse {
+    fn make_sound(&self) {
+        println!("ヒヒーン");
+    }
+}
+
+impl Animal for Cat {
+    fn make_sound(&self) {
+        println!("ニャー");
+    }
+}
 
 fn main() {
-    let horse = Horse {
-        name: String::from("Thunder"),
-        age: 5,
-        color: String::from("Black"),
-        father: String::from("Lightning"),
-        mother: String::from("Storm"),
-    };
-    println!("{:?}", horse);
+    let horse = Horse;
+    let cat = Cat;
+    horse.make_sound();
+    cat.make_sound();
 }
+
