@@ -1,26 +1,36 @@
-trait Animal {
-    fn make_sound(&self);
+use rand::Rng;
+
+enum GachaResult {
+    Hit(u32),  // 当たり金額
+    Miss,      // ハズレ（メッセージは処理側で決める）
 }
 
-struct Horse;
-struct Cat;
+fn gacha() -> GachaResult {
+    let mut rng = rand::thread_rng();
+    let roll = rng.gen_range(0..10);
 
-impl Animal for Horse {
-    fn make_sound(&self) {
-        println!("ヒヒーン");
+    if roll == 0 || roll == 1 || roll == 2 {
+        GachaResult::Hit(500)
+    } else {
+        GachaResult::Miss
     }
 }
 
-impl Animal for Cat {
-    fn make_sound(&self) {
-        println!("ニャー");
+fn open_gacha(result: GachaResult) {
+    match result {
+        GachaResult::Hit(amount) => {
+            println!("当たり！{}円を獲得！", amount);
+        }
+        GachaResult::Miss => {
+            println!("ハズレ...また回してね！");
+        }
     }
 }
 
 fn main() {
-    let horse = Horse;
-    let cat = Cat;
-    horse.make_sound();
-    cat.make_sound();
+    for i in 1..=5 {
+        println!("--- {}回目のガチャ ---", i);
+        let result = gacha();
+        open_gacha(result);
+    }
 }
-
