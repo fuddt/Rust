@@ -83,7 +83,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "sample_struct"
+name = "sample"
 version = "0.1.0"
 dependencies = [
  "rand",
